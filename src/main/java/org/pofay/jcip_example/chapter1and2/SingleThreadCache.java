@@ -2,7 +2,6 @@ package org.pofay.jcip_example.chapter1and2;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class SingleThreadCache<K, V> implements SimpleCache<K, V> {
