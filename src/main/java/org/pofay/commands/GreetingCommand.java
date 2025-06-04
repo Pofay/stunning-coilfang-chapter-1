@@ -1,4 +1,4 @@
-package org.pofay;
+package org.pofay.commands;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
