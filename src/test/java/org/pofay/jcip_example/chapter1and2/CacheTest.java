@@ -1,12 +1,12 @@
 package org.pofay.jcip_example.chapter1and2;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 public class CacheTest {
 
@@ -113,9 +113,11 @@ public class CacheTest {
             });
         }
 
-        for (var t: threads) t.start();
+        for (var t : threads)
+            t.start();
 
-        for (var t: threads) t.join();
+        for (var t : threads)
+            t.join();
 
         final var expectedSize = threadCount * entriesPerThread;
         assertEquals(expectedSize, cache.size());
@@ -124,4 +126,28 @@ public class CacheTest {
         assertEquals("val9009", cache.get("9009"));
     }
 
+    @Test
+    public void stressTestConcurrentAccess() throws InterruptedException {
+        final LockedCache<Integer, String> cache = new LockedCache<>();
+        final int opsPerThread = 1000;
+        final int threadCount = 5;
+        Thread[] threads = new Thread[threadCount];
+
+        for (int i = 0; i < threadCount; i++) {
+            threads[i] = new Thread(() -> {
+                for (int j = 0; j < opsPerThread; j++) {
+                    cache.put(j, "val" + j);
+                    cache.get(j);
+                    cache.containsKey(j);
+                }
+            });
+        }
+
+        for (Thread t : threads)
+            t.start();
+        for (Thread t : threads)
+            t.join();
+
+        assertTrue(cache.size() <= opsPerThread); // Upper bound (some keys get overwritten)
+    }
 }
