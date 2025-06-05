@@ -97,10 +97,31 @@ public class CacheTest {
     }
 
     @Test
-    public void concurrentPutAndGetShouldBehaveConsistently() {
+    public void concurrentPutAndGetShouldBehaveConsistently() throws InterruptedException {
         final LockedCache<String, String> cache = new LockedCache<>();
-        final int threadCount = 100;
+        final int threadCount = 10;
+        final var entriesPerThread = 100;
         final var threads = new Thread[threadCount];
+
+        for (var i = 0; i < threadCount; i++) {
+            final var threadId = i;
+            threads[i] = new Thread(() -> {
+                for (var j = 0; j < entriesPerThread; j++) {
+                    final var key = String.valueOf(threadId * 1000 + j);
+                    cache.put(key, "val" + key);
+                }
+            });
+        }
+
+        for (var t: threads) t.start();
+
+        for (var t: threads) t.join();
+
+        final var expectedSize = threadCount * entriesPerThread;
+        assertEquals(expectedSize, cache.size());
+
+        assertEquals("val0", cache.get("0"));
+        assertEquals("val9009", cache.get("9009"));
     }
 
 }
