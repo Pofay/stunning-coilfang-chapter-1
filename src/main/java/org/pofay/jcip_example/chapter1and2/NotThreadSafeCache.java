@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SingleThreadCache<K, V> implements SimpleCache<K, V> {
+public class NotThreadSafeCache<K, V> implements SimpleCache<K, V> {
     private final Map<K, V> cache = new HashMap<>();
 
     @Override

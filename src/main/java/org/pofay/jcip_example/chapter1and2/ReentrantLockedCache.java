@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class LockedCache<K, V> implements SimpleCache<K, V> {
+public class ReentrantLockedCache<K, V> implements SimpleCache<K, V> {
     private final Map<K, V> cache = new HashMap<>();
     private final ReentrantLock lock = new ReentrantLock();
 
