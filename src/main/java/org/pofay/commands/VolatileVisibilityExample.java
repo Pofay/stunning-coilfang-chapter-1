@@ -1,20 +1,20 @@
 package org.pofay.commands;
 
-import org.pofay.jcip_example.chapter3.bookexamples.NoVisibilityState;
-import org.pofay.jcip_example.chapter3.bookexamples.ReaderThread;
+import org.pofay.jcip_example.chapter3.bookexamples.VolatileReaderThread;
+import org.pofay.jcip_example.chapter3.bookexamples.VolatileVisibilityState;
 
 import picocli.CommandLine.Command;
 
-@Command(name = "no-visibility")
-public class NoVisibilityExample implements Runnable {
+@Command(name = "volatile-visibility")
+public class VolatileVisibilityExample implements Runnable {
 
     @Override
     public void run() {
-        
         for (var i = 0; i < 1_000_000; i++) {
-            var state = new NoVisibilityState();
-            var thread = new ReaderThread(state);
+            var state = new VolatileVisibilityState();
+            var thread = new VolatileReaderThread(state);
 
+            
             var writerThread = new Thread(() -> {
                 state.setNumber(42);
                 state.setReady(true);
@@ -22,7 +22,7 @@ public class NoVisibilityExample implements Runnable {
 
             thread.start();
             writerThread.start();
-
+                        
             try {
                 thread.join(1000);
                 writerThread.join(1000);
@@ -36,6 +36,6 @@ public class NoVisibilityExample implements Runnable {
                 break;
             }
         }
-
     }
+
 }

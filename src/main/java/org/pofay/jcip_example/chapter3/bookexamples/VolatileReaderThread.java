@@ -1,9 +1,9 @@
 package org.pofay.jcip_example.chapter3.bookexamples;
 
-public class ReaderThread extends Thread {
-    private final NoVisibilityState state;
+public class VolatileReaderThread extends Thread {
+    private final VolatileVisibilityState state;
 
-    public ReaderThread(NoVisibilityState state) {
+    public VolatileReaderThread(VolatileVisibilityState state) {
         this.state = state;
     }
 
