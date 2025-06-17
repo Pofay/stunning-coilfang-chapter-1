@@ -8,11 +8,9 @@ import org.pofay.jcip_example.chapter1and2.SimpleCache;
 import org.pofay.jcip_example.chapter1and2.SimpleSynchronizedCache;
 import org.pofay.jcip_example.chapter1and2.SynchronizedWithObjectCache;
 
-import io.quarkus.picocli.runtime.annotations.TopCommand;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-@TopCommand
 @Command(name = "cache-benchmark", description = "Runs cache concurrency benchmarks")
 public class CacheBenchmarkV1 implements Runnable {
 
