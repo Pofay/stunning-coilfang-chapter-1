@@ -1,7 +1,7 @@
 package org.pofay.commands;
 
-import org.pofay.jcip_example.chapter3.bookexamples.NoVisibilityState;
-import org.pofay.jcip_example.chapter3.bookexamples.ReaderThread;
+import org.pofay.jcip_example.chapter3.bookexamples.visibilityexample.NoVisibilityState;
+import org.pofay.jcip_example.chapter3.bookexamples.visibilityexample.ReaderThread;
 
 import picocli.CommandLine.Command;
 

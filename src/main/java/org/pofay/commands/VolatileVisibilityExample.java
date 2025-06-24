@@ -1,7 +1,7 @@
 package org.pofay.commands;
 
-import org.pofay.jcip_example.chapter3.bookexamples.VolatileReaderThread;
-import org.pofay.jcip_example.chapter3.bookexamples.VolatileVisibilityState;
+import org.pofay.jcip_example.chapter3.bookexamples.visibilityexample.VolatileReaderThread;
+import org.pofay.jcip_example.chapter3.bookexamples.visibilityexample.VolatileVisibilityState;
 
 import picocli.CommandLine.Command;
 

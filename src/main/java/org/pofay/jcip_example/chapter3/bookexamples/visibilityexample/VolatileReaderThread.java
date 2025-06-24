@@ -1,4 +1,4 @@
-package org.pofay.jcip_example.chapter3.bookexamples;
+package org.pofay.jcip_example.chapter3.bookexamples.visibilityexample;
 
 public class VolatileReaderThread extends Thread {
     private final VolatileVisibilityState state;
