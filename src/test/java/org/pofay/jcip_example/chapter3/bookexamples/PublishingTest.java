@@ -1,9 +1,8 @@
-package org.pofay.jcip_example.chapter3;
+package org.pofay.jcip_example.chapter3.bookexamples;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -12,10 +11,9 @@ import java.util.concurrent.CountDownLatch;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.EncapsulatedStates;
-import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.ThisEscapeInnerClass;
+// import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.ThisEscapeInnerClass;
 import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.UnsafeStates;
 import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.util.EventSource;
-import org.pofay.jcip_example.chapter3.bookexamples.publishingexamples.util.ImmediateEventSource;
 
 public class PublishingTest {
 
@@ -38,7 +36,9 @@ public class PublishingTest {
     @Test
     public void encapsulatedStatesCannotHaveItsInternalStateModified() {
         final var sut = new EncapsulatedStates();
-        final var expected = sut.getStates();
+        final var expected = new String[] {
+                "HI", "LO", "UP"
+        };
 
         // Can safely have different variables
         // that can reference sut.getStates
@@ -51,7 +51,7 @@ public class PublishingTest {
     }
 
     @Test
-    @Disabled("Fixing")
+    @Disabled("Will come back to this later")
     public void testThisEscape() throws InterruptedException {
         final var out = new ByteArrayOutputStream();
         System.setOut(new PrintStream(out));
@@ -75,7 +75,7 @@ public class PublishingTest {
 
         // You need to modify ThisEscapeInnerClass to accept a latch and count down
         // after registering the listener but before setting internalState
-        final var sut = new ThisEscapeInnerClass(eventSource, latch);
+        // final var sut = new ThisEscapeInnerClass(eventSource, latch);
 
         
         t.join();
